@@ -1,118 +1,92 @@
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.*;
 
 
-public class CalculadoraFinal extends JFrame implements ActionListener {
+public class CalculadoraEpica extends JFrame implements ActionListener {
 
    JButton btnsuma,btnresta,btnmulti,btndiv,btnlimpiar,btnsalir;
-   JTextField valor1,valor2,result;
-   JLabel label1,label2,label3,etiqueta;
+   JTextField valor1,valor2,camporesultado;
+   JLabel label1,label2;
   
-   public CalculadoraFinal() {
-  
-      super("Calculadora Final");
-      Controles();
-      setSize(450,800);
-      setVisible(true);
-    }
  
-   public void Controles() {
- 
-      Container panel = getContentPane();
-      panel.setLayout( new FlowLayout());
-      
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
+   public void Controles(){
+   
+      Container contenedor = getContentPane();
+      contenedor.setLayout( new FlowLayout());
       
       label1 = new JLabel("Numero 1");
+      contenedor.add(label1);
       
-      label1.setBounds(2,2, 80, 80);
-      panel.add(label1);
-      
-      etiqueta = new JLabel(new ImageIcon("Calculadora.jpg"));
-      etiqueta.setBounds(12,250,1000,720);
-      panel.add(etiqueta);
-      
-      valor1 = new JTextField(30);
-      
-      valor1.setBounds(65, 30, 110, 30);
-      panel.add(valor1);
+      valor1 = new JTextField(10);
+      contenedor.add(valor1);
       
       label2 = new JLabel("Numero 2");
+      contenedor.add(label2);
       
-      label2.setBounds(2, 35, 80, 80);
-      panel.add(label2);
-
-      valor2 = new JTextField(33);
-      valor2.setBounds(65, 60, 110, 30);
-      panel.add(valor2);
-      
-      label3 = new JLabel("Resultado");
-      
-      label3.setBounds(2, 75, 80, 80);
-      panel.add(label3);
-      
-      result = new JTextField(10);
-      result.setBounds(65, 100,110, 30);
-      panel.add(result);
+      valor2 = new JTextField(10);
+      contenedor.add(valor2);
       
       btnsuma = new JButton("+");
-      
-      btnsuma.setBounds(200,20, 50, 40);
-      panel.setLayout(null);
-      
-      panel.add(btnsuma);
+      contenedor.add(btnsuma);
       btnsuma.addActionListener(this);
-
+      
       btnresta = new JButton("-");
-      
-      btnresta.setBounds(250, 20, 50, 40);
-      panel.add(btnresta);
+      contenedor.add(btnresta);
       btnresta.addActionListener(this);
-
-      btnmulti = new JButton("x");
       
-      btnmulti.setBounds(200, 60, 50, 40);
-      panel.add(btnmulti);
+      btnmulti = new JButton("x");
+      contenedor.add(btnmulti);
       btnmulti.addActionListener(this);
       
       btndiv = new JButton("/");
-      
-      btndiv.setBo    label2.setBounds(2, 35, 80, 80);
-      panel.add(label2);
+      btndiv.addActionListener(this);
+      contenedor.add(btndiv);
 
-      valor2 = new JTextField(33);
-      valor2.setBounds(65, 60, 110, 30);
-      panel.add(valor2);
+      camporesultado = new JTextField(10);
+      contenedor.add(camporesultado);
       
-      label3 = new JLabel("Resultado");
+      btnlimpiar = new JButton("Limpiar");
+      contenedor.add(btnlimpiar);
+      btnlimpiar.addActionListener(this);
       
-      label3.setBounds(2, 75, 80, 80);
-      panel.add(label3);
+      btnsalir=new JButton("Salir");
+      btnsalir.setBackground(Color.red);
+      contenedor.add(btnsalir);
+      btnsalir.addActionListener(this);
+   }
+  
+   public CalculadoraEpica(){
+  
+      super("Calculadora");//calcu controles
+      Controles();
+      setSize(380,200);
+      setLocationRelativeTo(null);//Centrar ventana
+      setVisible(true);
+    }
+  
+   public void actionPerformed(ActionEvent e) {
       
-      result = new JTextField(10);
-      result.setBounds(65, 100,110, 30);
-      panel.add(result);
-      
-      btnsuma = new JButton("+");
-      
-      btnsuma.setBounds(200,20, 50, 40);
-      panel.setLayout1,num2,resu;
-      String resultadoFinal;
+      double  num1,num2,resu;
+      String resultado;
       
       if (e.getSource()==btnsuma) {//suma
           if(valor1.getText().equals("") || valor2.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Los datos no están completos",
+            JOptionPane.showMessageDialog(null, "Los datos no estÃ¡n completos",
             "Error",JOptionPane.WARNING_MESSAGE); 
          }
          
          else { //suma operaciones
           
-          num1 = Double.parseDouble(valor1.getText());
-          num2 = Double.parseDouble(valor2.getText());
-          resu = num1 + num2;
-          resultadoFinal=String.valueOf(resu);
-          result.setText(resultadoFinal);
+          num1=Double.parseDouble(valor1.getText());
+          num2=Double.parseDouble(valor2.getText());
+          resu=num1+num2;
+          resultado=String.valueOf(resu);
+          camporesultado.setText(resultado);
+          
          }          
       }
         
@@ -120,7 +94,7 @@ public class CalculadoraFinal extends JFrame implements ActionListener {
       
          if(valor1.getText().equals("") || valor2.getText().equals("")){
          
-         JOptionPane.showMessageDialog(null, "Los datos no están completos",
+         JOptionPane.showMessageDialog(null, "Los datos no estÃ¡n completos",
          "Error",JOptionPane.ERROR_MESSAGE); 
          
          }
@@ -130,8 +104,8 @@ public class CalculadoraFinal extends JFrame implements ActionListener {
           num1=Double.parseDouble(valor1.getText());
           num2=Double.parseDouble(valor2.getText());
           resu=num1-num2;
-          resultadoFinal=String.valueOf(resu);
-          result.setText(resultadoFinal);
+          resultado=String.valueOf(resu);
+          camporesultado.setText(resultado);
           
          }          
       } 
@@ -140,56 +114,74 @@ public class CalculadoraFinal extends JFrame implements ActionListener {
          
          if(valor1.getText().equals("") || valor2.getText().equals("")){
          
-          JOptionPane.showMessageDialog(null, "Los datos no están completos",
+          JOptionPane.showMessageDialog(null, "Los datos no estÃ¡n completos",
           "Error",JOptionPane.ERROR_MESSAGE); 
           
          }
          
          else{//Multiplicacion Operaciones
          
-          num1 = Double.parseDouble(valor1.getText());
-          num2 = Double.parseDouble(valor2.getText());
-          resu = num1*num2;
-          resultadoFinal = String.valueOf(resu);
-          result.setText(resultadoFinal);
-          
+          num1=Double.parseDouble(valor1.getText());
+          num2=Double.parseDouble(valor2.getText());
+          resu=num1*num2;
+          resultado=String.valueOf(resu);
+          camporesultado.setText(resultado);
           
          }          
       }
       
-      
       if (e.getSource() == btndiv) {//division
          if(valor1.getText().equals("") || valor2.getText().equals("")) {
           
-          JOptionPane.showMessageDialog(null, "Los datos no están completos",
+          JOptionPane.showMessageDialog(null, "Los datos no estÃ¡n completos",
           "Error",JOptionPane.ERROR_MESSAGE);
           
          }
          
-      else 
+
+          else {
+            num1=Double.parseDouble(valor1.getText());
+            num2=Double.parseDouble(valor2.getText());
+            resu=num1/num2;
+            resultado=String.valueOf(resu);
+            camporesultado.setText(resultado);
            
-         if ( valor2.getText().equals("0")) {
+            
+            if (valor1.getText().equals("0") || valor2.getText().equals("0")) {
+
 
              JOptionPane.showMessageDialog(null, "La division entre 0 no es posible",
              "Error",JOptionPane.ERROR_MESSAGE);
-             valor2.setText(null);
 
-          }
- 
-          else {
-            num1 = Double.parseDouble(valor1.getText());
-            num2 = Double.parseDouble(valor2.getText());
-            resu = num1/num2;
-            resultadoFinal =String.format("%.3f",resu);
-            result.setText(resultadoFinal);
+
+            }
+            
+             /*         
+            try{ //division operaciones   
+               resu=num1/num2;
+               resultado=String.valueOf(resu);
+               camporesultado.setText(resultado);
+             }
+             
+            catch(ArithmeticException ae) {
+               JOptionPane.showMessageDialog(null, "La division entre 0 no es posible",
+               "Error",JOptionPane.ERROR_MESSAGE);
+
+             }
+             */
+         
+         
+         
          }
+         
+         
       }
-          
-      if (e.getSource()==btnlimpiar) {
+         
+      if (e.getSource()==btnlimpiar){
       
          valor1.setText("");
-         valor2.setText("");
-         result.setText("");
+            valor2.setText("");
+            camporesultado.setText("");
             
       } 
       
