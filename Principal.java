@@ -1,8 +1,8 @@
-public class Principal {
+public class PrincipalCalculadoraEpica {
 
    public static void main(String[] args) {
 
-      CalculadoraFinal calc = new CalculadoraFinal();
+      CalculadoraEpica calc = new CalculadoraEpica();
       
    }
 }
